@@ -1,0 +1,17 @@
+﻿@model TestProject.Models.About
+@{
+    ViewBag.Title = "AboutUs";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+<div class="container">
+    <div class="col-md-12">
+        <h4>About Demo project</h4>
+        <img src="~/Content/Moderna/img/dummies/dummy-1.jpg" alt="" class="align-center img-box img-responsive" />
+        <p>
+            @Html.Raw(Model.Description)
+        </p>
+    </div>
+</div>
+
+

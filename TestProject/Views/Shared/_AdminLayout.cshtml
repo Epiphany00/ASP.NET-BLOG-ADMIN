@@ -1,0 +1,275 @@
+﻿
+@{
+    if (Session["ID"] == null)
+    {
+        Response.Redirect("/Admins/Login/");
+    }
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title</title>
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/Content/HTML/assets/images/favicon.ico">
+    <link href="~/Content/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+
+    <!-- App css -->
+    <link href="~/Content/HTML/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/HTML/assets/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="~/Content/HTML/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/HTML/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/HTML/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/HTML/assets/js/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTables/dataTables.bootstrap4.js"></script>
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <link href="~/Content/ckeditor/contents.css" rel="stylesheet" />
+
+    @RenderSection("head", required: false)
+
+
+</head>
+
+<body>
+
+    <!-- Top Bar Start -->
+    <div class="topbar">
+
+        <!-- LOGO -->
+        <div class="topbar-left">
+            <a href="/Admins/Index" class="logo">
+                <span>
+                    <img src="~/Content/HTML/assets/images/logo-sm.png" alt="logo-small" class="logo-sm">
+                </span>
+                <span>
+                    <img src="~/Content/HTML/assets/images/logo.png" alt="logo-large" class="logo-lg logo-light">
+                    <img src="~/Content/HTML/assets/images/logo-dark.png" alt="logo-large" class="logo-lg">
+                </span>
+            </a>
+        </div>
+        <!--end logo-->
+        <!-- Navbar -->
+
+
+        <nav class="navbar-custom">
+            <ul class="list-unstyled topbar-nav float-right mb-0">
+                <li class="nav-item"><a class="nav-link" href="/Home/Index/"><i class="ti-archive text-muted mr-2"></i> Web Site</a></li>
+                
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-toggle="dropdown" href="#" role="button"
+                               aria-haspopup="false" aria-expanded="false">
+                                <i class="ti-bell noti-icon"></i>
+                                <span class="badge badge-danger badge-pill noti-icon-badge">@ViewBag.CommentValidation</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-lg pt-0">
+
+                                <h6 class="dropdown-item-text font-15 m-0 py-3 bg-primary text-white d-flex justify-content-between align-items-center">
+                                    Notifications <span class="badge badge-light badge-pill"> @ViewBag.CommentValidation</span>
+                                </h6>
+
+                                <!-- All-->
+                                <a href="/Comments/Index" class="dropdown-item text-center text-primary">
+                                    View all <i class="fi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </li>
+
+
+                  
+
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="false" aria-expanded="false">
+                        <img src="@Session["Picture"]" class="rounded-circle" />
+                        <span class=" UserName">@Session["UserName"] </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="User/Details/@Session["ID"]"><i class="ti-user text-muted mr-2"></i> Profile</a>
+                        <div class="dropdown-divider mb-0"></div>
+                        <a class="dropdown-item" href="/Admins/Logout/"><i class="ti-power-off text-muted mr-2"></i> Logout</a>
+                    </div>
+                </li>
+            </ul><!--end topbar-nav-->
+
+            <ul class="list-unstyled topbar-nav mb-0">
+                <li>
+                    <button class="nav-link button-menu-mobile waves-effect waves-light">
+                        <i class="ti-menu nav-icon"></i>
+                    </button>
+                </li>
+                <li class="hide-phone app-search">
+                    <form role="search" class="">
+                        <input type="text" id="AllCompo" placeholder="Search..." class="form-control">
+                        <a href=""><i class="fas fa-search"></i></a>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- end navbar-->
+    </div>
+    <!-- Top Bar End -->
+    <!-- Left Sidenav -->
+
+
+            <div class="left-sidenav">
+                <ul class="metismenu left-sidenav-menu">
+                    <li>
+                        <a href="javascript: void(0);"><i class="ti-bar-chart"></i><span>Admin</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li class="nav-item"><a class="nav-link" href="/Admins/Create/"><i class="ti-control-record"></i>Create</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/Admins/ShowAdmins/"><i class="ti-control-record"></i>Admin List</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);"><i class="ti-bar-chart"></i><span>Users</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li class="nav-item"><a class="nav-link" href="/User/Create/"><i class="ti-control-record"></i>Create</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/Admins/ShowUsers/"><i class="ti-control-record"></i>User List</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);"><i class="ti-bar-chart"></i><span>Categories</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li class="nav-item"><a class="nav-link" href="/Categories/Create/"><i class="ti-control-record"></i>Create</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/Categories/Index/"><i class="ti-control-record"></i>Category List</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                    <li>
+                        <a href="javascript: void(0);"><i class="ti-bar-chart"></i><span>Blogs</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li class="nav-item"><a class="nav-link" href="/Blogs/Create/"><i class="ti-control-record"></i>Create</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/Comments/Index/"><i class="ti-control-record"></i>Comments</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/Blogs/Index/"><i class="ti-control-record"></i>Blog List</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);"><i class="ti-bar-chart"></i><span>About</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li class="nav-item"><a class="nav-link" href="/Abouts/Create/"><i class="ti-control-record"></i>Create</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/Abouts/Index/"><i class="ti-control-record"></i>All About</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);"><i class="ti-bar-chart"></i><span>Slider</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li class="nav-item"><a class="nav-link" href="/Sliders/Create/"><i class="ti-control-record"></i>Create</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/Sliders/Index/"><i class="ti-control-record"></i>All Sliders</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);"><i class="ti-bar-chart"></i><span>Services</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li class="nav-item"><a class="nav-link" href="/Services/Create/"><i class="ti-control-record"></i>Create</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/Services/Index/"><i class="ti-control-record"></i>Service List</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);"><i class="ti-bar-chart"></i><span>Identity</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li class="nav-item"><a class="nav-link" href="/Identities/Create/"><i class="ti-control-record"></i>Create</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/Identities/Index/"><i class="ti-control-record"></i>Identity List</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);"><i class="ti-bar-chart"></i><span>Contact Informations</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li class="nav-item"><a class="nav-link" href="/Contacts/Create/"><i class="ti-control-record"></i>Create</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/Contacts/Index/"><i class="ti-control-record"></i>Contact Information List</a></li>
+                        </ul>
+                    </li>
+
+
+
+
+
+
+
+                </ul>
+            </div>
+
+    
+
+    <!-- end left-sidenav-->
+
+    <div class="page-wrapper">
+        <!-- Page Content-->
+        <div class="page-content">
+
+            <div class="container-fluid">
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                        </div><!--end page-title-box-->
+                    </div><!--end col-->
+                </div>
+                <!-- end page title end breadcrumb -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="container-fluid">
+
+
+                                @RenderBody()
+
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
+
+
+            </div><!-- container -->
+        </div>
+
+    </div>
+
+    <footer class="footer text-center text-sm-left">
+        &copy; 2020 Crovex <span class="text-muted d-none d-sm-inline-block float-right">Crafted with <i class="mdi mdi-heart text-danger"></i> by Mannatthemes</span>
+    </footer><!--end footer-->
+    <!-- end page-wrapper -->
+    <!-- jQuery  -->
+
+    <script src="~/Content/HTML/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/HTML/assets/js/metismenu.min.js"></script>
+    <script src="~/Content/HTML/assets/js/waves.js"></script>
+    <script src="~/Content/HTML/assets/js/feather.min.js"></script>
+    <script src="~/Content/HTML/assets/js/jquery.slimscroll.min.js"></script>
+    <script src="~/Content/HTML/assets/js/jquery-ui.min.js"></script>
+
+    <script src="~/Content/plugins/moment/moment.js"></script>
+    <script src="~/Content/plugins/apexcharts/apexcharts.min.js"></script>
+    <script src="~/Content/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="~/Content/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/Content/plugins/flot-chart/jquery.canvaswrapper.js"></script>
+    <script src="~/Content/plugins/flot-chart/jquery.colorhelpers.js"></script>
+    <script src="~/Content/plugins/flot-chart/jquery.flot.js"></script>
+    <script src="~/Content/plugins/flot-chart/jquery.flot.saturated.js"></script>
+    <script src="~/Content/plugins/flot-chart/jquery.flot.browser.js"></script>
+    <script src="~/Content/plugins/flot-chart/jquery.flot.drawSeries.js"></script>
+    <script src="~/Content/plugins/flot-chart/jquery.flot.uiConstants.js"></script>
+    <script src="~/Content/plugins/flot-chart/jquery.flot-dataType.js"></script>
+    <script src="~/Content/HTML/assets/pages/jquery.crm_dashboard.init.js"></script>
+
+    <!-- App js -->
+    <script src="~/Content/HTML/assets/js/app.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

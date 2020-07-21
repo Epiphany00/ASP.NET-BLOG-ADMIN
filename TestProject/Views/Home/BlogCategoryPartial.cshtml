@@ -1,0 +1,10 @@
+﻿@model IEnumerable<TestProject.Models.Category>
+
+<ul class="cat">
+    @foreach (var item in Model)
+    {
+        <li><i class="icon-angle-right"></i><a href="/Home/CategoryBlog/@item.categoryID">@item.categoryname</a><span> (@item.Blogs.Count())</span></li>
+    }
+
+
+</ul>

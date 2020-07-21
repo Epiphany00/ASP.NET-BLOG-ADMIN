@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "ShowAbout";
+    Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+}
+
+@model TestProject.Models.User
+
+
+<h2>About</h2>
+
+
+<dt>
+    @Html.DisplayNameFor(model => model.About)
+</dt>
+
+<dd>
+    @Html.DisplayFor(model => model.About)
+</dd>

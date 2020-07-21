@@ -1,0 +1,13 @@
+﻿
+@model IEnumerable<TestProject.Models.Blog>
+@foreach (var item in Model)
+{
+    <li>
+        <h6><a href="/Home/BlogDetail/@item.blogID">@item.title</a></h6>
+        <hr/>
+        <img src="@item.pictureURL" class="col-lg-pull-4" alt="@item.title" height="100" width="100" />
+
+
+    </li>
+}
+

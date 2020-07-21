@@ -1,0 +1,48 @@
+﻿@model IEnumerable<TestProject.Models.User>
+
+@{
+    ViewBag.Title = "ShowComments";
+    Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+}
+
+
+<h2> Your Comments</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+           Title
+        </th>
+
+        <th>
+           Comment
+        </th>
+        <th>
+            Validation
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in @ViewBag.Comments)
+    {
+<tr>
+    <td>
+        @ViewBag.Comments.BlogID
+    </td>
+  
+
+    <td>
+        @ViewBag.Comments.Comment1
+    </td>
+    <td>
+        @ViewBag.Comments.validation
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.CommentID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.CommentID })
+    </td>
+</tr>
+    }
+
+</table>

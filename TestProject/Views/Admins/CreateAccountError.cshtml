@@ -1,0 +1,206 @@
+﻿@model TestProject.Models.User
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Crovex - Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/Content/HTML/assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="~/Content/HTML/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/HTML/assets/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="~/Content/HTML/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/HTML/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/HTML/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body class="account-body accountbg">
+
+    <!-- Log In page -->
+    <div class="container">
+        <div class="row vh-100 ">
+            <div class="col-12 align-self-center">
+                <div class="auth-page">
+                    <div class="card auth-card shadow-lg">
+                        <div class="card-body">
+                            <div class="px-3">
+                                <div class="auth-logo-box">
+                                    <a href="~/Content/HTML/dashboard/analytics-index.html" class="logo logo-admin"><img src="~/Content/HTML/assets/images/logo-sm.png" height="55" alt="logo" class="auth-logo"></a>
+                                </div><!--end auth-logo-box-->
+
+                                <div class="text-center auth-logo-text">
+                                    <h4 class="mt-0 mb-3 mt-5">Free Register</h4>
+                                    <p class="text-muted mb-0">Please Join Us</p>
+                                </div> <!--end auth-logo-text-->
+
+
+                                @using (Html.BeginForm("CreateAccountError", "Admins", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal auth-form my-4">
+                                <h3 >This Email Has Already Taken</h3>
+                               
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <label for="model.Name">Name</label>
+
+                                    <div class="input-group mb-3">
+                                        <span class="auth-form-icon">
+                                            <i class="dripicons-user"></i>
+                                        </span>
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="model.LastName">LastName</label>
+                                    <div class="input-group mb-3">
+                                        <span class="auth-form-icon">
+                                            <i class="dripicons-user"></i>
+                                        </span>
+                                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="model.UserName">UserName</label>
+                                    <div class="input-group mb-3">
+                                        <span class="auth-form-icon">
+                                            <i class="dripicons-user"></i>
+                                        </span>
+                                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="model.Password">Password</label>
+                                    <div class="input-group mb-3">
+                                        <span class="auth-form-icon">
+                                            <i class="dripicons-lock"></i>
+                                        </span>
+                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="model.Email">Email</label>
+                                    <div class="input-group mb-3">
+                                        <span class="auth-form-icon">
+                                            <i class="dripicons-mail"></i>
+                                        </span>
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="model.Picture"> Select a Picture</label>
+                                    <div class="input-group mb-3">
+                                        <span class="auth-form-icon">
+                                            <i class="dripicons-pin"></i>
+                                        </span>
+                                        <input type="file" name="Picture" accept=".png,.jpg,.jpeg" class="form-control" />
+                                        @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="model.About"> Write Something About You</label>
+                                    <div class="input-group mb-3">
+                                        <span class="auth-form-icon">
+                                        </span>
+                                        <textarea class="form-control" name="About" value=" model.About">   </textarea>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label for="model.birtday"> Select Your Birthday</label>
+                                    <div class="input-group mb-3">
+                                        <span class="auth-form-icon">
+                                            <i class="dripicons-calendar"></i>
+                                        </span>
+                                        <input type="date" class="form-control" id="birtday" placeholder="Enter Birthday" value="model.birthday">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-10 col-form-label text-left">Select</label>
+                                    <div class="input-group mb-3">
+                                        <span class="auth-form-icon">
+                                            <i class="dripicons-user"></i>
+                                        </span>
+                                        @Html.ValidationMessageFor(model => model.role, "", new { @class = "text-danger" })
+                                        <select class="form-control" value=@Html.EditorFor(model => model.role)>
+                                            <option>User</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-0 row">
+                                    <div class="col-12 mt-2">
+                                        <input type="submit" value="Register" class="btn btn-gradient-primary btn-round btn-block waves-effect waves-light" />
+                                    </div>
+                                </div> <!--end form-group-->
+                            </div>
+
+
+                                }
+                                <br />
+
+                                <div>
+                                    <div class="col-md-offset-10 col-md-10">
+                                        @Html.ActionLink("Back to List", "Login")
+                                    </div>
+                                </div>
+
+
+
+                            </div><!--end /div-->
+
+                        </div><!--end card-body-->
+                    </div><!--end card-->
+
+                </div><!--end auth-page-->
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+    <!-- End Log In page -->
+    <!-- jQuery  -->
+    <script src="~/Content/HTML/assets/js/jquery.min.js"></script>
+    <script src="~/Content/HTML/assets/js/jquery-ui.min.js"></script>
+    <script src="~/Content/HTML/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/HTML/assets/js/metismenu.min.js"></script>
+    <script src="~/Content/HTML/assets/js/waves.js"></script>
+    <script src="~/Content/HTML/assets/js/feather.min.js"></script>
+    <script src="~/Content/HTML/assets/js/jquery.slimscroll.min.js"></script>
+
+    <!-- App js -->
+    <script src="~/Content/HTML/assets/js/app.js"></script>
+
+</body>
+
+</html>
+

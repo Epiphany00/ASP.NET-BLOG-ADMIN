@@ -1,0 +1,148 @@
+﻿@model TestProject.Models.Blog
+
+
+@{
+    ViewBag.Title = "BlogDetail";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+
+<section id="inner-headline">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
+                    <li class="active">Blog Detail</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+
+                <article>
+                    <div class="post-image">
+                        <div class="post-heading">
+                            <h3>@Model.title</h3>
+                        </div>
+                        <div class="bottom-article">
+                            <ul class="meta-post">
+
+
+                                <li><i class="icon-folder-open"></i><a href="#">This  Blog About  @Model.Category.categoryname</a></li>
+                                <li><i class="icon-comments"></i><a href="#"> Total Comments  @Model.Comments.Where(x => x.validation == "True").Count()</a></li>
+                            </ul>
+
+                        </div>
+                        <img src="@Model.pictureURL" alt="@Model.title" />
+                    </div>
+                    <p>
+                        @Html.Raw(Model.description)
+                    </p>
+
+                </article>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3>Leave a Comment</h3>
+                        <form >
+                            <div>
+
+
+                                <select class="form-control" id="UserName">
+                                    <option>@Session["UserName"]</option>
+                                </select>
+                                <br />
+                                <select class="form-control" id="Email">
+                                    <option>@Session["Email"]</option>
+                                </select>
+                                <br />
+                                <textarea typeof="text" id="Comment1" class="form-control"></textarea>
+                                <br />
+                                <button type="submit" class="btn btn-success" id="Send">Make a Comment</button>
+
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+
+                
+                    <div class="col-lg-6">
+                        <div>
+                            <h3>Blog Comments</h3>
+                            @foreach (var item in Model.Comments.OrderByDescending(x => x.CommentID).Where(x => x.validation == "True"))
+                            {
+                              
+                                  <p class="blankline">@item.UserName - @item.Email</p>
+                                  <h5 class="widgetheading">@item.Comment1</h5>
+                                  <hr/>
+                                 
+                              }
+
+                        </div>
+                    </div>
+                
+
+
+
+
+            </div>
+            <div class="col-lg-4">
+                <aside class="right-sidebar">
+                    <div class="widget">
+                        <form class="form-search">
+                            <input class="form-control" type="text" placeholder="Search..">
+                        </form>
+                    </div>
+
+                    <div class="widget">
+                        <h5 class="widgetheading">Categories</h5>
+                        @{
+                            Html.RenderAction("BlogCategoryPartial", "Home");
+                        }
+                    </div>
+                    <div class="widget">
+                        <h5 class="widgetheading">Latest Blogs</h5>
+                        <ul class="recent">
+                            @{
+                                Html.RenderAction("BlogSubmitDetail", "Home");
+                            }
+                        </ul>
+                    </div>
+
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <script src="~/Content/Moderna/js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#Send").click(function () {
+            var UserName = $("#UserName").val();
+            var Email = $("#Email").val();
+            var Comment1 = $("#Comment1").val();
+            $.ajax({
+                url: '/Home/MakeAComment/',
+                data: { UserName: UserName, Email: Email, Comment1: Comment1, blogID:@Model.blogID },
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    alert("Your comment has been added, we will check it and then it will be published.");
+                }
+            });
+        });
+    })
+
+    </script>
+
+    

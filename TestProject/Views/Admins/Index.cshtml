@@ -1,0 +1,259 @@
+﻿@model IEnumerable<TestProject.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+
+</script>
+@using TestProject.Models
+
+<div class="page-wrapper">
+    <!-- Page Content-->
+    <div class="page-content">
+        <div class="container-fluid">
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="float-right">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Crovex</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item active">CRM</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">CRM</h4>
+                    </div><!--end page-title-box-->
+                </div><!--end col-->
+            </div>
+            <!-- end page title end breadcrumb -->
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media">
+                                <img src="../assets/images/users/user-1.png" alt="" class="thumb-md rounded-circle mr-2">
+                                <div class="media-body align-self-center">
+                                    <h4 class="mt-0 mb-1">Welcome Back @Session["UserName"]  </h4>
+                                    <p class="text-muted mb-0 font-14 pr-5"></p>
+                                </div><!--end media-body-->
+                            </div><!--end media-->
+                            <div class="welcome-img">
+                                <img src="../assets/images/widgets/w-2.svg" alt="" height="120" class="mt-n4 mr-5 d-none d-lg-block">
+                            </div>
+                        </div><!--end card-body-->
+                    </div><!--end card-->
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="card crm-data-card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-4 align-self-center">
+                                            <div class="icon-info">
+                                                <i class="far fa-smile rounded-circle bg-soft-success"></i>
+                                            </div>
+                                        </div><!-- end col-->
+                                        <div class="col-8 text-right">
+                                            <p class="text-muted font-14">Total Users</p>
+                                            <h3 class="mb-0">@ViewBag.UsersCount</h3>
+                                        </div><!-- end col-->
+                                    </div><!-- end row-->
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                        </div><!--end col-->
+                        <div class="col-sm-3">
+                            <div class="card crm-data-card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-4 align-self-center">
+                                            <div class="icon-info">
+                                                <i class="far fa-user rounded-circle bg-soft-pink"></i>
+                                            </div>
+                                        </div><!-- end col-->
+                                        <div class="col-8 text-right">
+                                            <p class="text-muted font-14">Total Comments</p>
+                                            <h3 class="mb-0">@ViewBag.CommentCount</h3>
+                                        </div><!-- end col-->
+                                    </div><!-- end row-->
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                        </div><!--end col-->
+                        <div class="col-sm-3">
+                            <div class="card crm-data-card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-4 align-self-center">
+                                            <div class="icon-info">
+                                                <i class="far fa-handshake rounded-circle bg-soft-purple"></i>
+                                            </div>
+                                        </div><!-- end col-->
+                                        <div class="col-8 text-right">
+                                            <p class="text-muted font-14">Total Blog</p>
+                                            <h3 class="mb-0">@ViewBag.BlogCount</h3>
+                                        </div><!-- end col-->
+                                    </div><!-- end row-->
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                        </div><!--end col-->
+                        <div class="col-sm-3">
+                            <div class="card crm-data-card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-4 align-self-center">
+                                            <div class="icon-info">
+                                                <i class="far fa-registered rounded-circle bg-soft-warning"></i>
+                                            </div>
+                                        </div><!-- end col-->
+                                        <div class="col-8 text-right">
+                                            <p class="text-muted font-14">Total Categories</p>
+                                            <h3 class="mb-0">@ViewBag.CategoryCount</h3>
+
+                                        </div><!-- end col-->
+                                    </div><!-- end row-->
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                        </div><!--end col-->
+                    </div><!--end row-->
+
+                    <div class="row">
+
+
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="header-title mt-0 mb-3">Users</h4>
+                                    <div class="table-responsive">
+                                        <div> <a href="/User/Create/" class="badge badge-md badge-soft-purple newUser">Add New User</a></div>
+                                        <table class="table table table-responsive-sm" id="myTable">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>User Name</th>
+                                                    <th>Email</th>
+                                                    <th>Role</th>
+                                                    <th>Picture</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                @foreach (User tmp in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@tmp.Name</td>
+                                                        <td>@tmp.LastName</td>
+                                                        <td>@tmp.UserName</td>
+                                                        <td>@tmp.Email</td>
+                                                        <td>@tmp.role</td>
+                                                        <td>@tmp.Picture</td>
+
+                                                        <td>
+                                                            <a href="~/User/Details/@tmp.ID" class="mr-2"><i class="fas fa-eye font-16 detailsuser" data-userID="@tmp.ID"></i></a>
+                                                            <a href="~/User/Edit/@tmp.ID" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
+                                                            <a href="#" class="fas fa-trash-alt text-danger font-16  deleteuser" data-userID="@tmp.ID"></a>
+                                                        </td>
+
+                                                    </tr>
+                                                }
+
+
+
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                        </div><!--end col-->
+                    </div><!--end row-->
+
+
+
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title mt-0 mb-3">Activity</h4>
+                                <div class="slimscroll crm-dash-activity">
+                                    <div class="activity">
+                                        <div class="activity-info">
+                                            <div class="icon-info-activity">
+                                                <i class="mdi mdi-checkbox-marked-circle-outline bg-soft-success"></i>
+                                            </div>
+                                            <div class="activity-info-text">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h6 class="m-0 w-75">Task finished</h6>
+                                                    <span class="text-muted d-block">10 Min ago</span>
+                                                </div>
+                                                <p class="text-muted mt-3">
+                                                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
+                                                    <a href="#" class="text-info">[more info]</a>
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                    </div><!--end activity-->
+                                </div><!--end crm-dash-activity-->
+                            </div>  <!--end card-body-->
+                        </div><!--end card-->
+                    </div><!--end col-->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title mt-0">Leads and Vendors</h4>
+                            <div id="CrmDashChart" class="flot-chart"></div>
+                        </div><!--end card-body-->
+                    </div><!--end card-->
+                </div><!-- end col-->
+            </div><!--end row-->
+
+
+
+
+        </div><!-- container -->
+
+    </div><!-- container -->
+
+
+</div><!-- container -->
+@*
+    @section scripts{
+
+        <script src="/Content/HTML/assets/js/jquery.min.js"></script>
+        <script src="/Scripts/jquery-3.5.1.min.js"></script>
+
+
+        <script>
+
+            $(".deleteuser").click(function () {
+                var result = confirm("Are you Sure to Delete This User? ");
+                if (result) {
+                    var userıd = $(this).data("userID");
+                    $.ajax({
+                        type: "POST",
+                        url: "/User/Delete/" + userıd,
+                        success: function () {
+                            alert("deletition success");
+                            window.location.replace("/Admins/Index");
+                        },
+                        error: function () {
+                            alert("there is an error time of deletition");
+
+                        }
+
+                    });
+                }
+
+            });
+        </script>
+
+
+    }
+*@

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<TestProject.Models.User>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+
+</script>
+
+@using TestProject.Models
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="header-title mt-0 mb-3">Users</h4>
+            <div class="table-responsive">
+                <div> <a href="/User/Create" class="badge badge-md badge-soft-purple newUser">Add New User</a></div>
+                <table class="table table table-responsive-sm" id="myTable">
+
+                    <thead class="thead-light">
+                        <tr>
+
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>About</th>
+                            <th>Birtday</th>
+                            <th>Picture</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var tmp in Model)
+                        {
+                            <tr>
+                                @if (tmp.role == "User")
+                                {
+
+                                    <td>@tmp.UserName</td>
+                                    <td>@tmp.Email</td>
+                                    <td>@tmp.About.Substring(0,5)</td>
+                                    <td>@tmp.birtday</td>
+                                    <td>
+                                        <img src="@tmp.Picture" width="100" height="100" />
+                                    </td>
+
+
+                                    <td>
+                                        <a href="~/User/Details/@tmp.ID" class="mr-2"><i class="fas fa-eye font-16 detailsuser" data-userID="@tmp.ID"></i></a>
+                                        <a href="~/User/Edit/@tmp.ID" class="mr-2"><i class="fas fa-edit text-info font-16 edituser" data-userID="@tmp.ID"></i></a>
+                                        <a href="~/User/Delete/@tmp.ID" class="fas fa-trash-alt text-danger font-16  deleteuser" data-userID="@tmp.ID"></a>
+                                    </td>
+
+
+                                }
+
+                            </tr>
+                        }
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div><!--end col-->

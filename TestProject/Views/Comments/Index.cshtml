@@ -1,0 +1,81 @@
+﻿@model IEnumerable<TestProject.Models.Comment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+
+</script>
+@using TestProject.Models
+
+<h2>Comments</h2>
+
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Blog.title)
+            </th>
+         
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.blogID)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.validation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Blog.title)
+                </td>
+             
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.Raw(item.Comment1.Substring(0, 5))
+                  
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.blogID)
+                </td>
+              
+                <td>
+                    @Html.DisplayFor(modelItem => item.validation)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CommentID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CommentID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CommentID })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
