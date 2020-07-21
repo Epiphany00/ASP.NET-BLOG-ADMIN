@@ -1,1 +1,1 @@
-# DemoProject
+# AdminPanelDemoProject
